@@ -11,7 +11,7 @@ const users = require('./routes/users');
 const authentications = require('./routes/authentications');
 const playlists = require('./routes/playlists');
 const collaborations = require('./routes/collaborations');
-const exportRoutes = require('./routes/exports'); // Renamed from 'exports' to 'exportRoutes'
+const exportRoutes = require('./routes/exports');
 const uploads = require('./routes/uploads');
 const likes = require('./routes/likes');
 

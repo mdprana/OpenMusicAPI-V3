@@ -16,7 +16,7 @@ const postUserHandler = async (request, h) => {
   return response;
 };
 
-const getUserByIdHandler = async (request, h) => {
+const getUserByIdHandler = async (request) => {
   const { id } = request.params;
   const user = await usersService.getUserById(id);
 
@@ -28,7 +28,7 @@ const getUserByIdHandler = async (request, h) => {
   };
 };
 
-const getUsersByUsernameHandler = async (request, h) => {
+const getUsersByUsernameHandler = async (request) => {
   const { username = '' } = request.query;
   const users = await usersService.getUsersByUsername(username);
 
