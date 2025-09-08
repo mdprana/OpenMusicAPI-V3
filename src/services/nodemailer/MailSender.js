@@ -3,7 +3,7 @@ const config = require('../../utils/config');
 
 class MailSender {
   constructor() {
-    this._transporter = nodemailer.createTransporter({
+    this._transporter = nodemailer.createTransport({
       host: config.smtp.host,
       port: config.smtp.port,
       auth: {

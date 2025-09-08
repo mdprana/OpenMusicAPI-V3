@@ -18,5 +18,6 @@ module.exports = {
     'max-len': ['error', { code: 120 }],
     'no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
     'consistent-return': 'off',
+    'linebreak-style': 'off', // Disable linebreak-style untuk Windows
   },
 };

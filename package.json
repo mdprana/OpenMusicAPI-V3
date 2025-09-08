@@ -4,6 +4,7 @@
   "description": "OpenMusic API v3 with export, upload, likes, and cache features",
   "main": "src/server.js",
   "scripts": {
+    "setup": "node setup.js",
     "start": "node src/server.js",
     "start:prod": "NODE_ENV=production node src/server.js",
     "start:consumer": "node src/consumer.js",
@@ -12,8 +13,22 @@
     "migrate": "node-pg-migrate",
     "migrate:up": "node-pg-migrate up",
     "migrate:down": "node-pg-migrate down",
-    "lint": "eslint src/",
-    "lint:fix": "eslint src/ --fix"
+    "migrate:reset": "node-pg-migrate down && node-pg-migrate up",
+    "lint": "eslint src/ --ext .js",
+    "lint:fix": "eslint src/ --ext .js --fix",
+    "lint:auto-fix": "node scripts/fix-eslint.js",
+    "lint:consumer": "eslint src/consumer.js --fix",
+    "test:smtp": "node scripts/test-smtp.js",
+    "debug:smtp": "node scripts/debug-smtp.js",
+    "check:nodemailer": "node scripts/check-nodemailer.js",
+    "fix:nodemailer": "node scripts/fix-nodemailer.js",
+    "debug:upload": "node scripts/debug-upload.js",
+    "test:upload": "node scripts/test-upload-api.js",
+    "debug:upload-detailed": "node scripts/test-upload-debug.js",
+    "test:services": "node scripts/test-services.js",
+    "test:all": "npm run test:services && npm run test:smtp",
+    "clean": "rm -rf node_modules package-lock.json && npm install",
+    "check": "npm run lint && npm run test:all"
   },
   "keywords": [
     "music",
@@ -33,8 +48,8 @@
   "license": "ISC",
   "dependencies": {
     "@hapi/hapi": "^21.3.2",
-    "@hapi/jwt": "^3.2.0",
     "@hapi/inert": "^7.1.0",
+    "@hapi/jwt": "^3.2.0",
     "amqplib": "^0.10.3",
     "aws-sdk": "^2.1490.0",
     "bcrypt": "^5.1.0",
@@ -46,10 +61,13 @@
     "redis": "^4.6.8"
   },
   "devDependencies": {
+    "@types/nodemailer": "^7.0.1",
+    "axios": "^1.6.0",
     "eslint": "^8.52.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.29.0",
-    "nodemon": "^3.0.1",
-    "node-pg-migrate": "^6.2.2"
+    "form-data": "^4.0.0",
+    "node-pg-migrate": "^6.2.2",
+    "nodemon": "^3.0.1"
   }
 }

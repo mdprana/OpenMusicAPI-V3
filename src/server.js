@@ -3,7 +3,6 @@ require('dotenv').config();
 const Hapi = require('@hapi/hapi');
 const Jwt = require('@hapi/jwt');
 const Inert = require('@hapi/inert');
-const path = require('path');
 
 // Import routes
 const albums = require('./routes/albums');
@@ -12,7 +11,7 @@ const users = require('./routes/users');
 const authentications = require('./routes/authentications');
 const playlists = require('./routes/playlists');
 const collaborations = require('./routes/collaborations');
-const exports = require('./routes/exports');
+const exportRoutes = require('./routes/exports'); // Renamed from 'exports' to 'exportRoutes'
 const uploads = require('./routes/uploads');
 const likes = require('./routes/likes');
 
@@ -27,6 +26,10 @@ const init = async () => {
     routes: {
       cors: {
         origin: ['*'],
+      },
+      payload: {
+        maxBytes: 1048576, // 1MB default
+        multipart: true,
       },
     },
   });
@@ -97,6 +100,16 @@ const init = async () => {
       if (response.isBoom) {
         const { statusCode } = response.output;
 
+        // Handle 415 Unsupported Media Type specifically for uploads
+        if (statusCode === 415) {
+          const newResponse = h.response({
+            status: 'fail',
+            message: 'Tipe media tidak didukung. Pastikan menggunakan multipart/form-data untuk upload file.',
+          });
+          newResponse.code(415);
+          return newResponse;
+        }
+
         if (statusCode === 404) {
           const newResponse = h.response({
             status: 'fail',
@@ -147,7 +160,7 @@ const init = async () => {
     ...authentications,
     ...playlists,
     ...collaborations,
-    ...exports,
+    ...exportRoutes, // Updated variable name
     ...uploads,
     ...likes,
   ]);

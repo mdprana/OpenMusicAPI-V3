@@ -1,19 +1,13 @@
 const { Pool } = require('pg');
 const { nanoid } = require('nanoid');
+const config = require('../../utils/config');
 const InvariantError = require('../../exceptions/InvariantError');
 const NotFoundError = require('../../exceptions/NotFoundError');
 const AuthorizationError = require('../../exceptions/AuthorizationError');
 
 class PlaylistsService {
   constructor(collaborationService) {
-    this._pool = new Pool({
-      user: process.env.PGUSER,
-      host: process.env.PGHOST,
-      database: process.env.PGDATABASE,
-      password: process.env.PGPASSWORD,
-      port: process.env.PGPORT,
-    });
-
+    this._pool = new Pool(config.database);
     this._collaborationService = collaborationService;
   }
 
@@ -143,7 +137,6 @@ class PlaylistsService {
       if (error instanceof NotFoundError) {
         throw error;
       }
-
       try {
         await this._collaborationService.verifyCollaborator(playlistId, userId);
       } catch {
