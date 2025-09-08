@@ -1,0 +1,7 @@
+{
+  "migrations-dir": "migrations",
+  "migrations-table": "pgmigrations",
+  "check-order": true,
+  "count": 1,
+  "timestamp": true
+}

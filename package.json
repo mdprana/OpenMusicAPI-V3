@@ -1,0 +1,55 @@
+{
+  "name": "openmusic-api-v3",
+  "version": "3.0.0",
+  "description": "OpenMusic API v3 with export, upload, likes, and cache features",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "start:prod": "NODE_ENV=production node src/server.js",
+    "start:consumer": "node src/consumer.js",
+    "dev": "nodemon src/server.js",
+    "dev:consumer": "nodemon src/consumer.js",
+    "migrate": "node-pg-migrate",
+    "migrate:up": "node-pg-migrate up",
+    "migrate:down": "node-pg-migrate down",
+    "lint": "eslint src/",
+    "lint:fix": "eslint src/ --fix"
+  },
+  "keywords": [
+    "music",
+    "api",
+    "nodejs",
+    "hapi",
+    "postgresql",
+    "jwt",
+    "authentication",
+    "rabbitmq",
+    "redis",
+    "aws-s3",
+    "export",
+    "cache"
+  ],
+  "author": "Made Pranajaya",
+  "license": "ISC",
+  "dependencies": {
+    "@hapi/hapi": "^21.3.2",
+    "@hapi/jwt": "^3.2.0",
+    "@hapi/inert": "^7.1.0",
+    "amqplib": "^0.10.3",
+    "aws-sdk": "^2.1490.0",
+    "bcrypt": "^5.1.0",
+    "dotenv": "^16.3.1",
+    "joi": "^17.10.2",
+    "nanoid": "^3.3.6",
+    "nodemailer": "^6.9.7",
+    "pg": "^8.11.3",
+    "redis": "^4.6.8"
+  },
+  "devDependencies": {
+    "eslint": "^8.52.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.29.0",
+    "nodemon": "^3.0.1",
+    "node-pg-migrate": "^6.2.2"
+  }
+}
